@@ -29,6 +29,7 @@ const HomeHero = () => {
             <button className="w-full sm:w-auto px-10 py-4 border-2 border-white text-white font-bold rounded-xl text-lg hover:bg-white/10 transition-all">
               How It Works
             </button>
+            
           </div>
         </div>
 
