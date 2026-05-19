@@ -33,7 +33,7 @@ const HomeHero = () => {
         </div>
 
         {/* Stat Bar - Responsive Hidden on Mobile/Tablet */}
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-[90%] max-w-[1280px] bg-white rounded-2xl shadow-xl py-8 px-12 flex justify-center gap-12 md:gap-24 hidden lg:flex">
+        <div className="absolute bottom-17 left-1/2 -translate-x-1/2 w-[75%] max-w-[1280px] bg-white rounded-2xl shadow-xl py-8 px-12 flex justify-center gap-12 md:gap-24 hidden lg:flex">
           <div className="text-center">
             <p className="text-3xl font-bold text-primary">500+</p>
             <p className="text-secondary text-xs uppercase tracking-wider font-semibold">
