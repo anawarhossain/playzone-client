@@ -1,2 +1,37 @@
 @import "tailwindcss";
 
+@theme {
+  /* কাস্টম কালার কনফিগারেশন */
+  --color-primary: #006c49;
+  --color-primary-container: #10b981;
+  --color-primary-fixed: #6ffbbe;
+  --color-primary-fixed-dim: #4edea3;
+  --color-secondary: #545f73;
+  --color-secondary-container: #d5e0f8;
+  --color-surface: #f9f9ff;
+  --color-surface-container-low: #f1f3ff;
+  --color-inverse-surface: #293040;
+  --color-on-surface: #141b2b;
+  --color-on-surface-variant: #3c4a42;
+  --color-outline-variant: #bbcabf;
+
+  /* কাস্টম স্পেসিং */
+  --spacing-margin-desktop: 40px;
+  --spacing-margin-mobile: 20px;
+  --spacing-container-max: 1280px;
+
+  /* কাস্টম ফন্ট ফ্যামিলি */
+  --font-sans: "Inter", sans-serif;
+  --font-display: "Outfit", sans-serif;
+}
+
+/* Google Material Icons এবং ফন্ট স্মুথিং নিশ্চিত করার জন্য */
+@layer base {
+  body {
+    background-color: var(--color-surface);
+    color: var(--color-on-surface);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
