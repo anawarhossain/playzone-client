@@ -3,10 +3,15 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { USER_DROPDOWN_LINKS } from "./constants/navigation";
+import { MdExpandMore } from "react-icons/md";
+import { RiLogoutCircleLine } from "react-icons/ri";
 
-const UserMenu = ({ userImage, userName }) => {
+const UserMenu = ({ userImage, userName, MemberSince }) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
+  const dateObj = new Date(MemberSince);
+  const year = dateObj.getFullYear();
 
   // বাইরের কোথাও ক্লিক করলে মেনু বন্ধ হবে
   useEffect(() => {
@@ -49,7 +54,7 @@ const UserMenu = ({ userImage, userName }) => {
         <span
           className={`material-symbols-outlined text-secondary transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
         >
-          expand_more
+          <MdExpandMore />
         </span>
       </button>
 
@@ -65,7 +70,7 @@ const UserMenu = ({ userImage, userName }) => {
               <p className="font-bold text-gray-900 truncate">
                 {userName || "Sports Player"}
               </p>
-              <p className="text-xs text-gray-500">Member since 2024</p>
+              <p className="text-xs text-gray-500">Member since {year}</p>
             </div>
             <div className="p-2">
               {USER_DROPDOWN_LINKS.map((link) => (
@@ -84,7 +89,7 @@ const UserMenu = ({ userImage, userName }) => {
               <div className="my-1 border-t border-gray-50" />
               <button className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-red-50 text-red-600 transition-colors text-sm font-medium w-full text-left cursor-pointer">
                 <span className="material-symbols-outlined text-lg">
-                  logout
+                  <RiLogoutCircleLine />
                 </span>{" "}
                 Logout
               </button>
@@ -95,3 +100,6 @@ const UserMenu = ({ userImage, userName }) => {
     </div>
   );
 };
+
+
+export default UserMenu;

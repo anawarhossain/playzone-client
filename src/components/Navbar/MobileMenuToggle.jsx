@@ -2,87 +2,99 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import { NAV_LINKS } from "./constants/navigation";
+import NavLink from "./NavLink";
 
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/facilities", label: "All Facilities" },
-  { href: "/dashboard", label: "Dashboard" },
-];
+
 
 const MobileMenuToggle = ({ isLoggedIn = false }) => {
   const [open, setOpen] = useState(false);
   return (
     <>
-      {/* Hamburger button — mobile only */}
+      {/* Hamburger Button */}
       <button
-        className="md:hidden flex flex-col justify-center items-center gap-1.5 w-10 h-10 rounded-lg hover:bg-surface-container transition-colors"
-        onClick={() => setOpen((prev) => !prev)}
-        aria-label="Toggle menu"
-        aria-expanded={open}
+        className="relative z-[70] w-10 h-10 flex flex-col justify-center items-center gap-1.5 bg-gray-50 rounded-xl"
+        onClick={() => setOpen(!open)}
       >
         <span
-          className={`block h-0.5 w-5 bg-on-surface transition-all duration-300 ${
-            open ? "rotate-45 translate-y-2" : ""
-          }`}
+          className={`h-0.5 w-5 bg-gray-900 transition-all ${open ? "rotate-45 translate-y-2" : ""}`}
         />
         <span
-          className={`block h-0.5 w-5 bg-on-surface transition-all duration-300 ${
-            open ? "opacity-0" : ""
-          }`}
+          className={`h-0.5 w-5 bg-gray-900 transition-all ${open ? "opacity-0" : ""}`}
         />
         <span
-          className={`block h-0.5 w-5 bg-on-surface transition-all duration-300 ${
-            open ? "-rotate-45 -translate-y-2" : ""
-          }`}
+          className={`h-0.5 w-5 bg-gray-900 transition-all ${open ? "-rotate-45 -translate-y-2" : ""}`}
         />
       </button>
 
-      {/* Mobile dropdown */}
-      {open && (
-        <div className="absolute top-full left-0 right-0 bg-white border-b border-outline-variant shadow-lg md:hidden z-50">
-          <div className="flex flex-col px-6 py-4 gap-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className="py-3 px-2 text-on-surface font-medium hover:text-primary border-b border-outline-variant/40 last:border-0 transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {open && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setOpen(false)}
+              className="fixed inset-0 bg-black/20 backdrop-blur-sm z-[60] md:hidden"
+            />
 
-            <div className="flex gap-3 pt-4">
-              {isLoggedIn ? (
-                <Link
-                  href="/dashboard"
-                  onClick={() => setOpen(false)}
-                  className="flex-1 text-center py-2.5 bg-primary-container text-white font-bold rounded-xl text-sm"
-                >
-                  Dashboard
-                </Link>
-              ) : (
-                <>
-                  <Link
-                    href="/login"
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed top-0 right-0 bottom-0 w-[80%] max-w-sm bg-white z-[65] shadow-2xl p-6 md:hidden flex flex-col"
+            >
+              <div className="mt-16 flex flex-col gap-2">
+                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-4 mb-2">
+                  Menu
+                </p>
+                {NAV_LINKS.map((link) => (
+                  <NavLink
+                    key={link.href}
+                    href={link.href}
+                    label={link.label}
+                    isMobile // এখানে মোবাইল মোড অন করে দেওয়া হলো
                     onClick={() => setOpen(false)}
-                    className="flex-1 text-center py-2.5 border-2 border-primary-container text-primary font-bold rounded-xl text-sm hover:bg-primary/5 transition-colors"
-                  >
-                    Login
-                  </Link>
+                  />
+                ))}
+              </div>
+
+              {/* Mobile Auth Buttons */}
+              <div className="mt-auto pb-10 space-y-3">
+                {!isLoggedIn ? (
+                  <>
+                    <Link
+                      href="/login"
+                      onClick={() => setOpen(false)}
+                      className="block w-full text-center py-3.5 border-2 border-primary-container text-primary font-bold rounded-2xl"
+                    >
+                      Login
+                    </Link>
+                    <Link
+                      href="/register"
+                      onClick={() => setOpen(false)}
+                      className="block w-full text-center py-4 bg-primary-container text-white font-bold rounded-2xl shadow-lg shadow-primary-container/20"
+                    >
+                      Get Started
+                    </Link>
+                  </>
+                ) : (
                   <Link
-                    href="/register"
+                    href="/dashboard"
                     onClick={() => setOpen(false)}
-                    className="flex-1 text-center py-2.5 bg-primary-container text-white font-bold rounded-xl text-sm hover:brightness-110 transition-all"
+                    className="block w-full text-center py-4 bg-primary/5 text-primary font-bold rounded-2xl"
                   >
-                    Register
+                    Go to Dashboard
                   </Link>
-                </>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
+                )}
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </>
   );
 };

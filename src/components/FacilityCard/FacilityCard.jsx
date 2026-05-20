@@ -2,11 +2,22 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { CiLocationOn } from "react-icons/ci";
+import { CiLocationOn, CiTimer } from "react-icons/ci";
 import { FaStar } from "react-icons/fa";
 import BookingButton from "./BookingButton"; // সেই আলাদা ক্লায়েন্ট বাটনটি
+import { HiOutlineUsers } from "react-icons/hi";
 
-const FacilityCard = ({ id, image, tag, rating, title, location, price }) => {
+const FacilityCard = ({
+  id,
+  image,
+  tag,
+  rating,
+  title,
+  location,
+  price,
+  capacity,
+  availability,
+}) => {
   return (
     // কার্ডের ওপর ক্লিক করলে ডিটেইলস পেজে যাবে
     <Link href={`/facilities/${id}`} className="block h-full group">
@@ -34,7 +45,7 @@ const FacilityCard = ({ id, image, tag, rating, title, location, price }) => {
         </div>
 
         {/* Content Section */}
-        <div className="p-6 flex flex-col flex-grow">
+        <div className="p-6 flex flex-col grow">
           <h3 className="text-xl font-bold text-gray-800 line-clamp-1 group-hover:text-primary transition-colors mb-2">
             {title}
           </h3>
@@ -43,6 +54,18 @@ const FacilityCard = ({ id, image, tag, rating, title, location, price }) => {
             <CiLocationOn className="text-lg shrink-0 mt-0.5 text-primary" />
             <span className="text-sm line-clamp-1">{location}</span>
           </div>
+          {capacity && (
+            <div className="flex items-center gap-2 text-gray-500 text-xs">
+              <HiOutlineUsers className="text-primary-container text-sm" />{" "}
+              <span>{capacity}</span>
+            </div>
+          )}
+          {availability && (
+            <div className="flex items-center gap-2 text-gray-500 text-xs">
+              <CiTimer className="text-primary-container text-sm" />{" "}
+              <span>Available: {availability}</span>
+            </div>
+          )}
 
           {/* Footer Section */}
           <div className="mt-auto pt-4 border-t border-gray-50 flex justify-between items-center">

@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import Link from "next/link";
 import { IoLogoIonic } from "react-icons/io";
@@ -5,8 +6,21 @@ import UserMenu from "./UserMenu";
 import MobileMenuToggle from "./MobileMenuToggle";
 import NavLink from "./NavLink";
 import { NAV_LINKS } from "./constants/navigation";
+import { authClient } from "@/app/lib/auth-client";
 
-const Navbar = ({ isLoggedIn = false, userImage, userName }) => {
+const Navbar = ({ isLoggedIn = false}) => {
+
+  const { data: session, isPending } = authClient.useSession();
+  const user = session?.user;
+  // console.log(session, "session")
+  console.log(user, "user");
+
+  if (user) {
+    isLoggedIn = true
+  } else {
+    isLoggedIn = false
+  }
+
   return (
     <nav className="sticky top-0 w-full z-50 bg-white/80 backdrop-blur-xl border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex justify-between items-center">
@@ -32,7 +46,7 @@ const Navbar = ({ isLoggedIn = false, userImage, userName }) => {
         {/* Desktop Auth/User Area */}
         <div className="hidden md:flex items-center gap-5">
           {isLoggedIn ? (
-            <UserMenu userImage={userImage} userName={userName} />
+            <UserMenu userImage={user?.image} userName={user?.name} MemberSince={user?.createdAt} />
           ) : (
             <div className="flex items-center gap-3">
               <Link

@@ -1,3 +1,6 @@
+import { IoIosPerson, IoIosSettings } from "react-icons/io";
+import { SlCalender } from "react-icons/sl";
+
 // constants/navigation.js
 export const NAV_LINKS = [
   { href: "/", label: "Home" },
@@ -6,7 +9,7 @@ export const NAV_LINKS = [
 ];
 
 export const USER_DROPDOWN_LINKS = [
-  { href: "/profile", label: "My Profile", icon: "person" },
-  { href: "/my-bookings", label: "My Bookings", icon: "calendar_today" },
-  { href: "/settings", label: "Settings", icon: "settings" },
+  { href: "/profile", label: "My Profile", icon: <IoIosPerson /> },
+  { href: "/my-bookings", label: "My Bookings", icon: <SlCalender /> },
+  { href: "/settings", label: "Settings", icon: <IoIosSettings /> },
 ];

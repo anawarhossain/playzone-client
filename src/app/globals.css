@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "@heroui/styles"; 
 
 @theme {
   /* কাস্টম কালার কনফিগারেশন */
