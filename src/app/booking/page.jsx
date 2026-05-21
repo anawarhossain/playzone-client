@@ -6,7 +6,11 @@ import { redirect } from "next/navigation";
 import { FiCheckCircle, FiClock, FiXCircle } from "react-icons/fi";
 import { HiOutlineTicket } from "react-icons/hi";
 import Link from "next/link";
-import { cancelBooking, getUserBookings } from "../lib/data";
+import {
+  cancelBooking,
+  getUserBookings,
+  updateBookingStatus,
+} from "../lib/data"; // ✅ updateBookingStatus import
 import StatCard from "@/components/dashboard/StatCard";
 import BookingRow from "@/components/dashboard/BookingRow";
 import { auth } from "../lib/auth";
@@ -24,9 +28,6 @@ const BookingsPage = async ({ searchParams }) => {
   const user = session.user;
   const activeTab = param.status || "All";
 
-  console.log(user, "user are here")
-
-  
   const summaryData = await getUserBookings(user?.email, "All");
 
   // Active tab অনুযায়ী filter করা
@@ -35,10 +36,7 @@ const BookingsPage = async ({ searchParams }) => {
       ? summaryData
       : summaryData.filter(
           (b) => b.status.toLowerCase() === activeTab.toLowerCase(),
-      );
-  
-  
-  console.log(allBookings, "all booking are here");
+        );
 
   // ৩. Stats calculation
   const stats = {
@@ -48,13 +46,24 @@ const BookingsPage = async ({ searchParams }) => {
     cancelled: summaryData.filter((b) => b.status === "Cancelled").length,
   };
 
-  // ✅ ৪. Cancel Server Action
+  // ৪. Cancel Server Action
   async function handleCancelBooking(bookingId) {
     "use server";
     try {
       await cancelBooking(bookingId);
     } catch (error) {
       console.error("Cancel failed:", error.message);
+      throw error;
+    }
+  }
+
+  // ✅ ৫. Status Change Server Action
+  async function handleStatusChange(bookingId, currentStatus, newStatus) {
+    "use server";
+    try {
+      await updateBookingStatus(bookingId, currentStatus, newStatus);
+    } catch (error) {
+      console.error("Status update failed:", error.message);
       throw error;
     }
   }
@@ -161,7 +170,8 @@ const BookingsPage = async ({ searchParams }) => {
                     <BookingRow
                       key={booking._id}
                       booking={formattedBooking}
-                      onCancel={handleCancelBooking} // ✅ cancel action পাস করা হচ্ছে
+                      onCancel={handleCancelBooking}
+                      onStatusChange={handleStatusChange} // ✅ status change action পাস করা হচ্ছে
                     />
                   );
                 })}
