@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import React, { forwardRef, useId } from "react";
 
 const CustomInput = forwardRef(
-  ({ label, icon, error, className, ...props }, ref) => {
+  ({ label, icon, rightIcon, error, className, ...props }, ref) => {
     const id = useId();
 
     return (
@@ -24,6 +24,7 @@ const CustomInput = forwardRef(
               "w-full h-14 rounded-2xl bg-white/70 backdrop-blur-md border border-gray-200 px-4 outline-none transition-all duration-300",
               "focus:border-primary-container focus:ring-4 focus:ring-blue-100 hover:border-primary-container text-gray-700",
               icon ? "pl-12" : "pl-4",
+              rightIcon ? "pr-12" : "pr-4",
               error && "border-red-500 focus:ring-red-100",
               className,
             )}
@@ -34,6 +35,12 @@ const CustomInput = forwardRef(
             <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-500 transition-colors">
               {icon}
             </span>
+          )}
+
+          {rightIcon && (
+            <div className="absolute right-4 top-1/2 -translate-y-1/2 unified-right-icon">
+              {rightIcon}
+            </div>
           )}
         </div>
         {error && <p className="text-xs text-red-500 ml-1">{error}</p>}
