@@ -12,11 +12,16 @@ import {
 } from "react-icons/hi";
 import { FaStar, FaParking, FaFirstAid } from "react-icons/fa";
 import BookingSidebar from "@/components/DetailsPage/BookingSidebar"; // আলাদা কম্পোনেন্ট
+import { auth } from "@/app/lib/auth";
+import { headers } from "next/headers";
 
 const FacilityDetailsPage = async ({ params }) => {
+  
   const paramslink = await params;
   const facility = await getSingleFacility(paramslink.id);
   // console.log(facility, "facililtyjdfhfdf")
+
+  
 
   if (!facility)
     return <div className="py-20 text-center">Facility not found!</div>;
