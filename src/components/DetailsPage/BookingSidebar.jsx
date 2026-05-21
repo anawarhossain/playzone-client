@@ -4,18 +4,68 @@ import { useState } from "react";
 import { HiOutlineClock, HiOutlineShieldCheck } from "react-icons/hi";
 import CustomInput from "../SearchBar/CustomInput";
 import CustomSelect from "../SearchBar/CustomSelect";
+import { useRouter } from "next/navigation";
+import { authClient } from "@/app/lib/auth-client";
+import { createBooking } from "@/app/lib/action";
 
 const BookingSidebar = ({ facility }) => {
+  const router = useRouter();
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
+
+  const [loading, setLoading] = useState(false);
   const [hours, setHours] = useState(1);
   const [date, setDate] = useState("");
   const [slot, setSlot] = useState("");
 
-  const totalPrice = facility.price * hours;
+  const totalPrice = Number(facility.price) * hours;
 
-  const handleBooking = () => {
-    if (!date || !slot) return alert("Please select date and time slot!");
+  const handleBooking = async () => {
+    // ১. ইউজার লগইন করা আছে কি না চেক
+    if (!user) {
+      alert("Please login first to book a facility!");
+      return router.push("/login");
+    }
+
+    // ২. ইনপুট ভ্যালিডেশন
+    if (!date || !slot || slot === "Select Time Slot") {
+      return alert("Please select a valid date and time slot.");
+    }
+
+    setLoading(true);
+
+    // ৩. বুকিং অবজেক্ট তৈরি
+    const bookingData = {
+      facilityId: facility._id,
+      facilityName: facility.name,
+      image: facility.image,
+      userEmail: user.email,
+      userName: user.name,
+      date,
+      slot,
+      hours,
+      price: totalPrice,
+      sport: facility.type,
+      location: facility.location,
+    };
+
+    try {
+      const result = await createBooking(bookingData);
+
+      if (result.success) {
+        alert("Booking Confirmed Successfully!");
+        router.push("/dashboard"); // ইউজারকে তার বুকিং লিস্টে পাঠিয়ে দেওয়া
+      } else {
+        alert(result.message || "Booking failed. Try again.");
+      }
+    } catch (error) {
+      alert("An error occurred. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+
     // এখানে বুকিং এপিআই কল হবে
-    console.log({ facilityId: facility._id, date, slot, hours, totalPrice });
+    // console.log({ facilityId: facility._id, date, slot, hours, totalPrice });
     alert("Proceeding to payment...");
   };
 
@@ -42,6 +92,7 @@ const BookingSidebar = ({ facility }) => {
           <CustomInput
             label="Booking Date"
             type="date"
+            min={new Date().toISOString().split("T")[0]}
             onChange={(e) => setDate(e.target.value)}
             icon={<HiOutlineClock size={20} />}
           />
@@ -51,6 +102,7 @@ const BookingSidebar = ({ facility }) => {
             onChange={(e) => setSlot(e.target.value)}
           />
 
+          {/* Duration Selector */}
           <div className="space-y-2">
             <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">
               Number of Hours
@@ -72,10 +124,11 @@ const BookingSidebar = ({ facility }) => {
             </div>
           </div>
 
+          {/* Summary Area */}
           <div className="bg-primary/5 rounded-2xl p-5 space-y-3 mt-8 border border-primary/10">
-            <div className="flex justify-between text-sm text-gray-600">
+            <div className="flex justify-between text-sm text-gray-600 font-medium">
               <span>
-                ৳{facility.price} x {hours} hours
+                ৳{facility.price} x {hours} hr
               </span>
               <span className="font-bold text-gray-900">৳{totalPrice}</span>
             </div>
@@ -89,18 +142,25 @@ const BookingSidebar = ({ facility }) => {
 
           <button
             onClick={handleBooking}
-            className="w-full py-4 bg-primary-container text-white font-black rounded-2xl shadow-xl shadow-primary-container/20 hover:brightness-110 transition-all active:scale-95 cursor-pointer"
+            disabled={loading}
+            className="w-full py-4 bg-primary-container text-white font-black rounded-2xl shadow-xl shadow-primary-container/20 hover:brightness-110 transition-all active:scale-95 cursor-pointer disabled:opacity-50"
           >
-            Confirm Booking
+            {loading ? "Processing..." : "Confirm Booking"}
           </button>
+          <p className="text-center text-[10px] text-gray-400 font-bold uppercase">
+            Secure payment gateway
+          </p>
         </div>
       </div>
 
       <div className="bg-gray-50 rounded-2xl p-5 border border-gray-100 flex gap-4 items-center">
         <HiOutlineShieldCheck className="text-primary-container" size={32} />
-        <p className="text-[10px] text-gray-400 font-medium leading-relaxed">
-          Your booking is protected by our secure payment system.
-        </p>
+        <div>
+          <p className="text-xs font-black text-gray-800">Payment Security</p>
+          <p className="text-[10px] text-gray-400 font-medium leading-relaxed">
+            Protected by SSL Encryption.
+          </p>
+        </div>
       </div>
     </div>
   );

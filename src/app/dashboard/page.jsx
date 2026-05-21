@@ -61,12 +61,9 @@ const BOOKINGS_DATA = [
   },
 ];
 
-const DashboardPage = () => {
+const BookingsPage = () => {
   return (
     <div className="flex min-h-screen bg-[#F8F9FD]">
-      
-      
-
       {/* Main Content */}
       <main className="flex-1 p-8">
         {/* Header */}
@@ -177,4 +174,4 @@ const DashboardPage = () => {
   );
 };
 
-export default DashboardPage;
+export default BookingsPage;

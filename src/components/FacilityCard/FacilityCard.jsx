@@ -49,7 +49,7 @@ const FacilityCard = ({
                 <span className="text-xs font-normal text-gray-400">/hr</span>
               </p>
             </div>
-            <BookingButton id={id} />
+              <BookingButton id={id} />
           </div>
         </div>
       </div>

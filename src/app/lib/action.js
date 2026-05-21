@@ -29,5 +29,21 @@ export const createFacilities = async (finalData) => {
 };
 
 
+export const createBooking = async (bookingData) => {
+  try {
+    const res = await fetch(`${process.env.BACKEND_URL}/booking`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(bookingData),
+    });
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    return { success: false, message: error.message };
+  }
+};
+
+
 
 

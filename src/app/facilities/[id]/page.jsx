@@ -16,7 +16,7 @@ import BookingSidebar from "@/components/DetailsPage/BookingSidebar"; // আল�
 const FacilityDetailsPage = async ({ params }) => {
   const paramslink = await params;
   const facility = await getSingleFacility(paramslink.id);
-  console.log(facility, "facililtyjdfhfdf")
+  // console.log(facility, "facililtyjdfhfdf")
 
   if (!facility)
     return <div className="py-20 text-center">Facility not found!</div>;

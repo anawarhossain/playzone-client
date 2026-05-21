@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import React, { forwardRef, useId } from "react";
 
 const CustomInput = forwardRef(
-  ({ label, icon, error, className, value, ...props }, ref) => {
+  ({ label, icon, error, className, ...props }, ref) => {
     const id = useId();
 
     return (
@@ -20,7 +20,6 @@ const CustomInput = forwardRef(
           <input
             id={id}
             ref={ref}
-            value={value || ""}
             className={cn(
               "w-full h-14 rounded-2xl bg-white/70 backdrop-blur-md border border-gray-200 px-4 outline-none transition-all duration-300",
               "focus:border-primary-container focus:ring-4 focus:ring-blue-100 hover:border-primary-container text-gray-700",

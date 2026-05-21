@@ -1,15 +1,21 @@
 // components/BookingButton.jsx
 "use client";
 
+import { useRouter } from "next/navigation";
+
 
 
 
 const BookingButton = ({ id }) => {
+
+  const router = useRouter()
+
   const handleBooking = (e) => {
     e.preventDefault(); // লিংকের ডিফল্ট বিহেভিয়ার বন্ধ করবে
     // e.stopPropagation(); // প্যারেন্ট লিংকে ক্লিক ইভেন্ট যাওয়া বন্ধ করবে
     console.log(`Booking facility with ID: ${id}`);
-    // এখানে আপনার বুকিং লজিক
+    router.push(`/facilities/${id}`);
+  
   };
 
   return (
