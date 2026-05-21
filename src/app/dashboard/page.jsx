@@ -12,13 +12,7 @@ import {
   FiXCircle,
 } from "react-icons/fi";
 import { HiOutlineTicket } from "react-icons/hi";
-import {
-  LuCalendarDays,
-  LuLayoutDashboard,
-  LuLogOut,
-  LuSettings,
-  LuUsers,
-} from "react-icons/lu";
+
 
 const BOOKINGS_DATA = [
   {
@@ -70,50 +64,11 @@ const BOOKINGS_DATA = [
 const DashboardPage = () => {
   return (
     <div className="flex min-h-screen bg-[#F8F9FD]">
-      {/* Sidebar */}
-      <aside className="w-64 bg-inverse-surface text-white flex flex-col p-6 sticky top-0 h-screen">
-        <div className="flex items-center gap-3 mb-10 px-2">
-          <div className="w-10 h-10 rounded-full bg-primary-container overflow-hidden border-2 border-white/20">
-            <Image
-              src="https://i.pravatar.cc/150?u=admin"
-              width={40}
-              height={40}
-              alt="User"
-            />
-          </div>
-          <div>
-            <p className="text-sm font-bold truncate">Admin User</p>
-            <p className="text-[10px] text-gray-400 truncate">
-              admin@playzone.com
-            </p>
-          </div>
-        </div>
-
-        <nav className="space-y-2 flex-grow">
-          <SidebarLink icon={LuLayoutDashboard} label="Dashboard" />
-          <SidebarLink icon={LuCalendarDays} label="Bookings" active />
-          <SidebarLink icon={FiGrid} label="Facilities" />
-          <SidebarLink icon={LuUsers} label="Customers" />
-          <SidebarLink icon={LuSettings} label="Settings" />
-        </nav>
-
-        <button className="flex items-center gap-3 text-gray-400 hover:text-red-400 p-3 transition-colors mt-auto text-sm font-bold">
-          <LuLogOut size={20} /> Logout
-        </button>
-      </aside>
+      
+      
 
       {/* Main Content */}
       <main className="flex-1 p-8">
-        <div className="flex justify-between items-center">
-          <h1 className="text-4xl font-black text-gray-900">Add New Facilitie</h1>
-        <Link
-          className="text-primary-container font-bold text-2xl"
-          href={"/dashboard/new"}
-        >
-          <FiPlusCircle className="" />
-        </Link>
-        </div>
-
         {/* Header */}
         <header className="flex justify-between items-end mb-8">
           <div>

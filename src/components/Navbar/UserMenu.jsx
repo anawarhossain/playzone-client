@@ -6,12 +6,25 @@ import { motion, AnimatePresence } from "framer-motion";
 import { USER_DROPDOWN_LINKS } from "./constants/navigation";
 import { MdExpandMore } from "react-icons/md";
 import { RiLogoutCircleLine } from "react-icons/ri";
+import { authClient } from "@/app/lib/auth-client";
+import { useRouter } from "next/navigation";
 
 const UserMenu = ({ userImage, userName, MemberSince }) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
   const dateObj = new Date(MemberSince);
   const year = dateObj.getFullYear();
+  const router = useRouter();
+
+  const LogoutHandeler = async () => {
+    await authClient.signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          router.push("/login"); // redirect to login page
+        },
+      },
+    });
+  };
 
   // বাইরের কোথাও ক্লিক করলে মেনু বন্ধ হবে
   useEffect(() => {
@@ -87,7 +100,10 @@ const UserMenu = ({ userImage, userName, MemberSince }) => {
                 </Link>
               ))}
               <div className="my-1 border-t border-gray-50" />
-              <button className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-red-50 text-red-600 transition-colors text-sm font-medium w-full text-left cursor-pointer">
+              <button
+                onClick={LogoutHandeler}
+                className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-red-50 text-red-600 transition-colors text-sm font-medium w-full text-left cursor-pointer"
+              >
                 <span className="material-symbols-outlined text-lg">
                   <RiLogoutCircleLine />
                 </span>{" "}
@@ -100,6 +116,5 @@ const UserMenu = ({ userImage, userName, MemberSince }) => {
     </div>
   );
 };
-
 
 export default UserMenu;

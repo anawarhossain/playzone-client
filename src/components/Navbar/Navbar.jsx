@@ -13,7 +13,7 @@ const Navbar = ({ isLoggedIn = false}) => {
   const { data: session, isPending } = authClient.useSession();
   const user = session?.user;
   // console.log(session, "session")
-  console.log(user, "user");
+  // console.log(user, "user");
 
   if (user) {
     isLoggedIn = true

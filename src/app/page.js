@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <div>
       <HomeHero />
-      <SearchBar />
+      {/* <SearchBar /> */}
       <HomeFacilityCard />
       {/* <App/> */}
       <HowItWork />

@@ -40,10 +40,10 @@ const RegisterPage = () => {
     const { name, email, password, profileUrl } = userData;
 
     const { data, error } = await authClient.signUp.email({
-      name: name, 
-      email: email, 
-      password: password, 
-      image: profileUrl || "", 
+      name: name,
+      email: email,
+      password: password,
+      image: profileUrl || "",
       callbackURL: "/",
     });
 
@@ -54,9 +54,16 @@ const RegisterPage = () => {
     }
     if (data) {
       toast.success("Account Create successfully", toastOptions);
-      // await authClient.signOut();
-      // router.push("/login");
+      await authClient.signOut();
+      router.push("/login");
     }
+  };
+
+  const HandleGoogleLogin = async () => {
+    const data = await authClient.signIn.social({
+      provider: "google",
+      callbackURL: "/",
+    });
   };
 
   return (
@@ -134,7 +141,6 @@ const RegisterPage = () => {
             <CustomInput
               label="Full Name"
               name="name"
-              
               placeholder="Enter Your Full Name"
               icon={<HiOutlineUser size={20} />}
             />
@@ -208,7 +214,11 @@ const RegisterPage = () => {
           </div>
 
           {/* Social Auth */}
-          <button className="w-full py-4 border-2 border-gray-100 rounded-2xl flex items-center justify-center gap-3 font-bold text-gray-700 hover:bg-gray-50 transition-all cursor-pointer">
+          <button
+            onClick={HandleGoogleLogin}
+            type="button"
+            className="w-full py-4 border-2 border-gray-100 rounded-2xl flex items-center justify-center gap-3 font-bold text-gray-700 hover:bg-gray-50 transition-all cursor-pointer"
+          >
             <FcGoogle size={24} />
             Continue with Google
           </button>

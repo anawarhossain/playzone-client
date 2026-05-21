@@ -12,10 +12,56 @@ import { IoLogoIonic, IoCheckmarkCircleOutline } from "react-icons/io5";
 import { FcGoogle } from "react-icons/fc";
 import { FiAlertCircle } from "react-icons/fi";
 import CustomInput from "@/components/SearchBar/CustomInput";
+import { toast } from "react-toastify";
+import { authClient } from "../lib/auth-client";
+import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState("Invalid email or password"); // ডেমো এরর মেসেজ
+  const [error, setError] = useState("Invalid email or password"); 
+  const router = useRouter();
+  
+  const toastOptions = {
+      position: "top-center",
+      autoClose: 5000,
+      pauseOnHover: true,
+      draggable: true,
+      theme: "light",
+    };
+  
+    const loginHandle = async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.currentTarget);
+      const userData = Object.fromEntries(formData.entries());
+      console.log(userData);
+  
+      const { email, password } = userData;
+  
+      const { data, error } = await authClient.signIn.email({
+        email: email,
+        password: password,
+        rememberMe: true,
+        callbackURL: "/",
+      });
+  
+      console.log("sign up response:", { data, error });
+  
+      if (error) {
+        console.log("Error signing up: " , error.message);
+      }
+      if (data) {
+        toast.success("Login successfully", toastOptions);
+        router.push("/");
+      }
+  };
+
+  const HandleGoogleLogin = async () => {
+    const data = await authClient.signIn.social({
+      provider: "google",
+      callbackURL: "/",
+    });
+  };
+  
 
   return (
     <div className="min-h-screen flex flex-col lg:flex-row bg-white font-sans">
@@ -72,11 +118,12 @@ const LoginPage = () => {
             </p>
           </div>
 
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={loginHandle}>
             {/* Email Input */}
             <div className="space-y-1">
               <CustomInput
                 label="Email Address"
+                name="email"
                 placeholder="your@email.com"
                 icon={<HiOutlineMail size={22} />}
               />
@@ -92,6 +139,7 @@ const LoginPage = () => {
             <div className="relative group">
               <CustomInput
                 label="Password"
+                name="password"
                 type={showPassword ? "text" : "password"}
                 placeholder="••••••••"
                 icon={<HiOutlineLockClosed size={22} />}
@@ -130,7 +178,10 @@ const LoginPage = () => {
             </div>
 
             {/* Login Button */}
-            <button className="w-full py-4 bg-primary-container text-white font-black rounded-2xl shadow-xl shadow-primary-container/20 hover:brightness-110 transition-all active:scale-95 cursor-pointer">
+            <button
+              type="submit"
+              className="w-full py-4 bg-primary-container text-white font-black rounded-2xl shadow-xl shadow-primary-container/20 hover:brightness-110 transition-all active:scale-95 cursor-pointer"
+            >
               Login
             </button>
           </form>
@@ -146,7 +197,11 @@ const LoginPage = () => {
           </div>
 
           {/* Social Auth */}
-          <button className="w-full py-4 border-2 border-gray-100 rounded-2xl flex items-center justify-center gap-3 font-bold text-gray-700 hover:bg-gray-50 transition-all cursor-pointer">
+          <button
+            onClick={HandleGoogleLogin}
+            type="button"
+            className="w-full py-4 border-2 border-gray-100 rounded-2xl flex items-center justify-center gap-3 font-bold text-gray-700 hover:bg-gray-50 transition-all cursor-pointer"
+          >
             <FcGoogle size={24} />
             Continue with Google
           </button>
