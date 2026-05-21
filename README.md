@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Playzone Client
 
-## Getting Started
+## Project Overview
 
-First, run the development server:
+**Playzone Client** is a Next.js-based web application for browsing, booking, and managing sports facilities. The app is designed to provide an interactive experience for users who want to find courts, fields, and play zones with available time slots and amenities.
+
+## Purpose
+
+The project enables users to:
+
+- view sport facilities and venue details
+- search and filter locations
+- register and authenticate
+- book available time slots
+- manage facility listings and bookings through a dashboard
+
+## Live URL
+
+Local development preview:
+
+- http://localhost:3000
+
+> If the app is deployed, replace the above local URL with the production site URL.
+
+## Features
+
+- Facility browsing and detail pages
+- Search filters and pagination
+- User authentication with registration and login
+- Booking workflow for selected time slots
+- Facility management dashboard for owners/admins
+- Responsive UI for desktop and mobile
+- Animated interactions using motion components
+- Notifications and toast messages
+
+## Key NPM Packages Used
+
+- `next` — React framework for server-rendered web apps
+- `react` and `react-dom` — UI library and DOM renderer
+- `tailwindcss` — utility-first CSS framework
+- `better-auth` and `@better-auth/mongo-adapter` — authentication and MongoDB adapter
+- `mongodb` — MongoDB driver for database access
+- `framer-motion` — animation library for UI motion
+- `react-icons` — scalable icon components
+- `react-toastify` — toast notifications
+- `@heroui/react` and `@heroui/styles` — UI component styling and design system
+- `clsx` — conditional class name helper
+- `tailwind-merge` — merge Tailwind CSS class names safely
+
+## Installation
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project Structure
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- `src/app/` — application routes and page components
+- `src/components/` — reusable UI components
+- `src/lib/` — client and server helper modules
+- `public/` — static assets
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Notes
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This README is based on the current project source and package configuration. Update the live URL and feature list as the app evolves.
