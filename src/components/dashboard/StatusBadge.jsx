@@ -1,16 +1,36 @@
-import React from 'react';
+import React from "react";
+
+// ✅ [নতুন] StatusBadge — BookingRow.jsx এ import করা হয়েছিল কিন্তু ফাইল ছিল না
+const statusConfig = {
+  Confirmed: {
+    bg: "bg-green-50",
+    text: "text-green-600",
+    dot: "bg-green-500",
+  },
+  Pending: {
+    bg: "bg-yellow-50",
+    text: "text-yellow-600",
+    dot: "bg-yellow-400",
+  },
+  Cancelled: {
+    bg: "bg-red-50",
+    text: "text-red-500",
+    dot: "bg-red-400",
+  },
+};
 
 const StatusBadge = ({ status }) => {
-  const styles = {
-    Confirmed: "bg-green-50 text-green-600 border-green-100",
-    Pending: "bg-orange-50 text-orange-600 border-orange-100",
-    Cancelled: "bg-red-50 text-red-600 border-red-100",
+  const config = statusConfig[status] || {
+    bg: "bg-gray-50",
+    text: "text-gray-500",
+    dot: "bg-gray-400",
   };
 
   return (
     <span
-      className={`px-3 py-1 rounded-full text-[10px] font-bold border ${styles[status] || styles.Pending}`}
+      className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold ${config.bg} ${config.text}`}
     >
+      <span className={`w-1.5 h-1.5 rounded-full ${config.dot}`} />
       {status}
     </span>
   );

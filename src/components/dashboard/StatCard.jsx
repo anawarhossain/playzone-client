@@ -1,4 +1,3 @@
-// components/dashboard/StatCard.jsx
 import React from "react";
 
 const StatCard = ({ label, value, icon: Icon, colorClass }) => (

@@ -45,5 +45,16 @@ export const createBooking = async (bookingData) => {
 };
 
 
+export const deleteFacility = async (id) => {
+  const res = await fetch(`${process.env.BACKEND_URL}/facilitie/${id}`, {
+    method: "DELETE",
+  });
+  const data = await res.json();
+  if (data.deletedCount > 0) {
+    revalidatePath("/dashboard/facilities");
+  }
+  return data;
+};
+
 
 

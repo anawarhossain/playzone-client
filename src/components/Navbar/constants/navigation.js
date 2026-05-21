@@ -9,8 +9,8 @@ export const NAV_LINKS = [
 ];
 
 export const USER_DROPDOWN_LINKS = [
-  { href: "/dashboard", label: "My Bookings", icon: <SlCalender /> },
-  { href: "/dashboard/new", label: "Add Facility", icon: <IoIosAdd /> },
+  { href: "/booking", label: "My Bookings", icon: <SlCalender /> },
+  { href: "/facilities-manage/new", label: "Add Facility", icon: <IoIosAdd /> },
   {
     href: "/facilities-manage",
     label: "Manage My Facilities",

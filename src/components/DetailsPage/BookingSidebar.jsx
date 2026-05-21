@@ -54,7 +54,7 @@ const BookingSidebar = ({ facility }) => {
 
       if (result.success) {
         alert("Booking Confirmed Successfully!");
-        router.push("/dashboard"); // ইউজারকে তার বুকিং লিস্টে পাঠিয়ে দেওয়া
+        router.push("/booking"); // ইউজারকে তার বুকিং লিস্টে পাঠিয়ে দেওয়া
       } else {
         alert(result.message || "Booking failed. Try again.");
       }
