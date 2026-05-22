@@ -132,10 +132,13 @@ export const updateBookingStatus = async (
   return res.json();
 };
 
-export const createBooking = async (bookingData) => {
+export const createBooking = async (bookingData, token) => {
   const res = await fetch(`${process.env.BACKEND_URL}/booking`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json", 
+      Authorization: `Bearer ${token}`
+     },
     body: JSON.stringify(bookingData),
   });
   if (!res.ok) {

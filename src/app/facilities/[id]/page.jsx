@@ -21,6 +21,11 @@ const FacilityDetailsPage = async ({ params }) => {
   const facility = await getSingleFacility(paramslink.id);
   // console.log(facility, "facililtyjdfhfdf")
 
+  const {token} = await auth.api.getToken({
+    headers: await headers()
+  })
+  // console.log(token)
+
   
 
   if (!facility)
@@ -82,7 +87,7 @@ const FacilityDetailsPage = async ({ params }) => {
 
           {/* Right Column: Booking Sidebar (Client Component) */}
           <div className="lg:col-span-4">
-            <BookingSidebar facility={facility} />
+            <BookingSidebar facility={facility} token={token} />
           </div>
         </div>
       </main>

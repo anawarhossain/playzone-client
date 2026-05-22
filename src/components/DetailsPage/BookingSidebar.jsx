@@ -5,10 +5,10 @@ import { HiOutlineClock, HiOutlineShieldCheck } from "react-icons/hi";
 import CustomInput from "../SearchBar/CustomInput";
 import CustomSelect from "../SearchBar/CustomSelect";
 import { useRouter } from "next/navigation";
+import { createBooking } from "@/app/lib/data";
 import { authClient } from "@/app/lib/auth-client";
-import { createBooking } from "@/app/lib/action";
 
-const BookingSidebar = ({ facility }) => {
+const BookingSidebar = ({ facility , token }) => {
   const router = useRouter();
   const { data: session } = authClient.useSession();
   const user = session?.user;
@@ -21,11 +21,13 @@ const BookingSidebar = ({ facility }) => {
   const totalPrice = Number(facility.price) * hours;
 
   const handleBooking = async () => {
+    console.log(token);
     // ১. ইউজার লগইন করা আছে কি না চেক
     if (!user) {
       alert("Please login first to book a facility!");
       return router.push("/login");
     }
+    
 
     // ২. ইনপুট ভ্যালিডেশন
     if (!date || !slot || slot === "Select Time Slot") {
@@ -33,6 +35,8 @@ const BookingSidebar = ({ facility }) => {
     }
 
     setLoading(true);
+
+    
 
     // ৩. বুকিং অবজেক্ট তৈরি
     const bookingData = {
@@ -50,7 +54,7 @@ const BookingSidebar = ({ facility }) => {
     };
 
     try {
-      const result = await createBooking(bookingData);
+      const result = await createBooking(bookingData, token);
 
       if (result.success) {
         alert("Booking Confirmed Successfully!");

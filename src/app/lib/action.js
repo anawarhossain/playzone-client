@@ -29,32 +29,32 @@ export const createFacilities = async (finalData) => {
 };
 
 
-export const createBooking = async (bookingData) => {
-  try {
-    const res = await fetch(`${process.env.BACKEND_URL}/booking`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(bookingData),
-    });
+// export const createBooking = async (bookingData) => {
+//   try {
+//     const res = await fetch(`${process.env.BACKEND_URL}/booking`, {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify(bookingData),
+//     });
 
-    const data = await res.json();
-    return data;
-  } catch (error) {
-    return { success: false, message: error.message };
-  }
-};
+//     const data = await res.json();
+//     return data;
+//   } catch (error) {
+//     return { success: false, message: error.message };
+//   }
+// };
 
 
-export const deleteFacility = async (id) => {
-  const res = await fetch(`${process.env.BACKEND_URL}/facilitie/${id}`, {
-    method: "DELETE",
-  });
-  const data = await res.json();
-  if (data.deletedCount > 0) {
-    revalidatePath("/dashboard/facilities");
-  }
-  return data;
-};
+// export const deleteFacility = async (id) => {
+//   const res = await fetch(`${process.env.BACKEND_URL}/facilitie/${id}`, {
+//     method: "DELETE",
+//   });
+//   const data = await res.json();
+//   if (data.deletedCount > 0) {
+//     revalidatePath("/dashboard/facilities");
+//   }
+//   return data;
+// };
 
 
 
