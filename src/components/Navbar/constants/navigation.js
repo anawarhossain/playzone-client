@@ -13,7 +13,7 @@ export const USER_DROPDOWN_LINKS = [
   { href: "/facilities-manage/new", label: "Add Facility", icon: <IoIosAdd /> },
   {
     href: "/facilities-manage",
-    label: "Manage My Facilities",
+    label: "Manage Facilities",
     icon: <MdDashboard />,
   },
 ];
