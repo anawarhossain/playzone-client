@@ -16,11 +16,7 @@ The project enables users to:
 
 ## Live URL
 
-Local development preview:
-
-- http://localhost:3000
-
-> If the app is deployed, replace the above local URL with the production site URL.
+- https://anawarhossain-playzone.vercel.app/
 
 ## Features
 
@@ -32,6 +28,57 @@ Local development preview:
 - Responsive UI for desktop and mobile
 - Animated interactions using motion components
 - Notifications and toast messages
+
+## Prerequisites
+
+- Node.js 18+ (or the version supported by Next.js 16+)
+- npm (or pnpm/yarn) to install dependencies
+- A running backend API that the client talks to (see "Backend & Auth" below)
+
+## Environment variables
+
+Create a `.env.local` file in the project root and set these variables used by the client:
+
+- `BACKEND_URL` — Base URL of the backend API (e.g. `http://localhost:4000`)
+- `BETTER_AUTH_URL` — Base URL of the Better Auth server (if using a separate auth server)
+- `MONGODB_CONNECTION_URL` — MongoDB connection URI (used by the embedded auth configuration)
+- `DATABASE_NAME` — MongoDB database name used by the auth adapter
+- `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` — OAuth credentials for Google social login (optional)
+
+Note: The client expects a separate backend API that exposes endpoints such as `/facilities` and `/booking`. Without a working backend and auth service the client will not be able to fetch or mutate data.
+
+## Backend & Auth
+
+- This repository is the frontend client. The server-side API and auth service are expected to run separately.
+- The app uses `better-auth` and `@better-auth/mongo-adapter` for authentication. The auth client is configured to talk to `BETTER_AUTH_URL` and the auth server needs access to the MongoDB instance specified by `MONGODB_CONNECTION_URL` and `DATABASE_NAME`.
+- If you don't have a production Better Auth instance, you can host one locally (see Better Auth docs) or point `BETTER_AUTH_URL` to your auth server.
+
+## Local setup
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Create `.env.local` with the required variables (see above).
+
+3. Start the development server:
+
+```bash
+npm run dev
+```
+
+Open `http://localhost:3000` in your browser.
+
+## Scripts
+
+- `npm run dev` — Run the app in development mode
+- `npm run build` — Create an optimized production build
+- `npm run start` — Start the production server after build
+- `npm run lint` — Run ESLint
+
+## Project Structure
 
 ## Key NPM Packages Used
 
@@ -60,6 +107,15 @@ npm run dev
 - `src/components/` — reusable UI components
 - `src/lib/` — client and server helper modules
 - `public/` — static assets
+
+## Contributing
+
+- Feel free to open issues or pull requests for bugs and improvements.
+- When contributing, describe how to reproduce the issue and include screenshots if applicable.
+
+## Contact
+
+If you need help running the project locally or want to integrate with the backend, open an issue or contact the maintainer.
 
 ## Notes
 
