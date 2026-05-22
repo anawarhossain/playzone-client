@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 export const createFacilities = async (finalData) => {
   try {
     const res = await fetch(
-      `${process.env.BACKEND_URL || "http://localhost:5000"}/facilitie`,
+      `${process.env.BACKEND_URL}/facilities`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
