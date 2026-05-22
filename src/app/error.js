@@ -60,15 +60,15 @@ export default function Error({ error, reset }) {
         <p className="text-gray-500 text-base md:text-lg leading-relaxed max-w-md mx-auto mb-10">
           An unexpected error occurred on our end. Don&apos;t worry — it&apos;s
           not your fault. Please{" "}
-          <span className="text-red-500 text-2xl font-bold">login first</span>{" "}
-          and try again or go back home.
+          <span className="text-red-500 text-2xl font-bold">login</span>{" "}
+          or and try again.
         </p>
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
           <button
             onClick={() => reset()}
-            className="flex items-center gap-2 px-8 py-4 bg-primary-container text-white font-bold rounded-2xl shadow-xl shadow-primary-container/20 hover:brightness-110 active:scale-95 transition-all cursor-pointer w-full sm:w-auto"
+            className="flex items-center gap-2 px-8 py-4 bg-primary-container text-white font-bold rounded-2xl shadow-xl shadow-primary-container/20 hover:brightness-110 active:scale-95 transition-all cursor-pointer  sm:w-auto text-center"
           >
             <HiOutlineRefresh size={20} />
             Try Again
@@ -76,9 +76,9 @@ export default function Error({ error, reset }) {
 
           <Link
             href="/login"
-            className="flex items-center gap-2 px-8 py-4 bg-white border-2 border-primary-container/30 text-primary-container font-bold rounded-2xl hover:bg-primary-container/5 transition-all w-full sm:w-auto"
+            className="flex items-center gap-2 px-8 py-4 bg-white border-2 border-primary-container/30 text-primary-container font-bold rounded-2xl hover:bg-primary-container/5 transition-all  sm:w-auto sm:text-center"
           >
-            <CiLogin size={20} />
+            <CiLogin className="" size={20} />
             Login
           </Link>
         </div>

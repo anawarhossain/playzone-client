@@ -67,7 +67,7 @@ const Navbar = ({ isLoggedIn = false}) => {
 
         {/* Mobile Toggle */}
         <div className="md:hidden">
-          <MobileMenuToggle isLoggedIn={isLoggedIn} />
+          <MobileMenuToggle isLoggedIn={isLoggedIn} user={user} />
         </div>
       </div>
     </nav>

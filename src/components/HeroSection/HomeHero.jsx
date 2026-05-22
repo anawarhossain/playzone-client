@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const HomeHero = () => {
@@ -23,9 +24,9 @@ const HomeHero = () => {
             cricket, badminton and more
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 px-6 sm:px-0">
-            <button className="w-full sm:w-auto px-10 py-4 bg-primary-container text-white font-bold rounded-xl text-lg hover:brightness-110 transition-all">
-              Explore Facilities
-            </button>
+            <Link href={"/facilities"} className="w-full sm:w-auto px-10 py-4 bg-primary-container text-white font-bold rounded-xl text-lg hover:brightness-110 transition-all">
+              See All Facilities
+            </Link>
             <button className="w-full sm:w-auto px-10 py-4 border-2 border-white text-white font-bold rounded-xl text-lg hover:bg-white/10 transition-all">
               How It Works
             </button>
