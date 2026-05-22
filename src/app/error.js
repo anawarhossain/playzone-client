@@ -55,7 +55,7 @@ export default function Error({ error, reset }) {
 
         {/* Text Content */}
         <h1 className="text-3xl md:text-4xl font-black text-gray-900 mb-4 tracking-tight">
-          {error?.message}
+          Unauthorized
         </h1>
         <p className="text-gray-500 text-base md:text-lg leading-relaxed max-w-md mx-auto mb-10">
           An unexpected error occurred on our end. Don&apos;t worry — it&apos;s
