@@ -124,5 +124,5 @@ This README is based on the current project source and package configuration. Up
 ## Project Screenshot
 
 <p align="center">
-  <img src="preview.png" alt="Project Preview" width="600">
+  <img src="public/preview.png" alt="Project Preview" width=" ">
 </p>
