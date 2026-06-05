@@ -17,6 +17,7 @@ The project enables users to:
 ## Live URL
 
 - https://anawarhossain-playzone.vercel.app/
+- [Live Link](https://anawarhossain-playzone.vercel.app/)
 
 ## Features
 
@@ -120,3 +121,9 @@ If you need help running the project locally or want to integrate with the backe
 ## Notes
 
 This README is based on the current project source and package configuration. Update the live URL and feature list as the app evolves.
+
+## Project Screenshot
+
+<p align="center">
+  <img src="preview.png" alt="Project Preview" width="600">
+</p>
