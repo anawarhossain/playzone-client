@@ -16,7 +16,6 @@ The project enables users to:
 
 ## Live URL
 
-- https://anawarhossain-playzone.vercel.app/
 - [Live Link](https://anawarhossain-playzone.vercel.app/)
 
 ## Features
