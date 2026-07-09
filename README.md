@@ -121,6 +121,20 @@ If you need help running the project locally or want to integrate with the backe
 
 This README is based on the current project source and package configuration. Update the live URL and feature list as the app evolves.
 
+## 👨‍💻 Author
+**Md Anawar Hossain**
+- **GitHub:** [@anawarhossain](https://github.com/anawarhossain)
+- **Facebook:** [Anawar Hossain](https://web.facebook.com/AnawarHossain55)
+- **LinkeIn:** [Anawar Hossain](https://www.linkedin.com/in/anawarhossain/)
+- **X(Twitter):** [Anawar Hossain](https://x.com/MDANAWAR22)
+- **WhatsApp:** [Anawar Hossain](https://wa.me/+8801701020694)
+- **Role:** Junior Developer
+
+
+## Live Link
+
+- [Live Link](https://anawarhossain-playzone.vercel.app/)
+
 ## Project Screenshot
 
 <p align="center">
